@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { ChatEngine } from "react-chat-engine";
+import ChatFeed from "./Component/ChatFeed";
+// require('dotenv').config()
 
-function App() {
+const App = () => {
+  const x = process.env.REACT_APP_PROJECT_ID;
+  const y = process.env.REACT_APP_SECRET;
+  const z = process.env.REACT_APP_USERNAME;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ChatEngine
+      height="100vh"
+      projectID={`${x}`}
+      userName={`${z}`}
+      userSecret={`${y}`}
+      renderChatFeed={(chatAppProps)=> <ChatFeed {... chatAppProps}/>}
+    /> 
   );
-}
+};
 
 export default App;
