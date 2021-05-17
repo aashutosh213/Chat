@@ -11,13 +11,13 @@ const ChatFeed = (props) => {
   const renderReadReceipt = (message, isMyMessage) => {
     return chat.people.map(
       (person, index) =>
-        person.read_last === message.id && (
+        person.last_read === message.id &&(
           <div
             key={`read_${index}`}
             className="read-receipt"
             style={{
-              float: isMyMessage ? "right" : "left",
-              background: `url(${person?.person?.avatar})`,
+              float: isMyMessage ? 'right' : 'left',
+              background: person.person.avatar && `url(${person.person.avatar})`,
             }}
           />
         )
@@ -34,23 +34,22 @@ const ChatFeed = (props) => {
       return (
         <div key={`msg_${index}`} style={{ width: "100%" }}>
           <div className="message-block">
-            {isMyMessage ? (
-              <MyMessage message={message} />
-            ) : (
-              <TheirMessage
+            {isMyMessage 
+              ? <MyMessage message={message} />
+             : <TheirMessage
                 message={message}
                 lastMessage={messages[lastMessage]}
               />
-            )}
+            }
           </div>
           <div
-            className="read-receipt"
+            className="read-receipts"
             style={{
-              marginRight: isMyMessage ? "18px" : "0px",
-              marginLeft: isMyMessage ? "0px" : "68px",
+              marginRight: isMyMessage ? '18px' : '0px',
+              marginLeft: isMyMessage ? '0px' : '68px',
             }}
           >
-            {renderReadReceipt(message, isMyMessage)}
+            { renderReadReceipt(message, isMyMessage) }
           </div>
         </div>
       );
